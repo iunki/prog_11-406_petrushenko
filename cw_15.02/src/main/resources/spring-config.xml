@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    <context:annotation-config />
+    <context:component-scan base-package="foo.bar"/>
+
+    <bean id="poem" class="foo.bar.Poem">
+        <constructor-arg name="text" value="Скажи-ка, дядя, ведь недаром Москва, спаленная пожаром, французу отдана?"/>
+    </bean>
+
+    <bean id="konfer" class="foo.bar.Konferanse">
+        <property name="performers">
+            <list>
+                <bean class="foo.bar.Juggler">
+                    <constructor-arg name="countOfBeanbags" value="15" />
+                    <constructor-arg name="poem" ref="poem" />
+                    <property name="name" value="Жонглер"/>
+                </bean>
+                <bean class="foo.bar.Clown">
+                    <constructor-arg name="name" value="Клоун"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+</beans>
