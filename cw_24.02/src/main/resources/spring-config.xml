@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    <context:annotation-config/>
+    <context:component-scan base-package="foo.bar"/>
+
+    <!--Songs-->
+    <bean id="song1" class="foo.bar.song.Song">
+        <constructor-arg name="name" value="Smells Like Teen Spirit"/>
+        <constructor-arg name="text" value="Hello, hello, hello, how low? Hello, hello, hello, how low?"/>
+    </bean>
+    <bean id="song2" class="foo.bar.song.Song">
+        <constructor-arg name="name" value="Heart-Shaped Box"/>
+        <constructor-arg name="text"
+                         value="She eyes me like a Pisces when I am weak I've been locked inside your heart-shaped box for weeks"/>
+    </bean>
+
+    <bean id="song3" class="foo.bar.song.Song">
+        <constructor-arg name="name" value="Сентябрь"/>
+        <constructor-arg name="text" value="Сентябрь горииит, убийца плачет, но он не смог поступить иначе"/>
+    </bean>
+    <bean id="song4" class="foo.bar.song.Song">
+        <constructor-arg name="name" value="Одиночество"/>
+        <constructor-arg name="text"
+                         value="Боги предали тебя И отравленной росой Пустое тело омывали, Заглушая голос твой"/>
+    </bean>
+
+    <!--Vocalist-->
+    <bean id="vocalist1" class="foo.bar.performer.impl.Vocalist">
+        <constructor-arg name="song" ref="song3"/>
+    </bean>
+
+    <!--Concert-->
+    <bean id="concert" class="foo.bar.concert.impl.ConcertImpl">
+        <constructor-arg name="members">
+            <list>
+                <bean id="band_1" class="foo.bar.member.impl.MemberImpl">
+                    <property name="bandName" value="Nirvana"/>
+                    <property name="songs">
+                        <list>
+                            <ref bean="song1"/>
+                            <ref bean="song2"/>
+                        </list>
+                    </property>
+                    <property name="performers">
+                        <list>
+                            <bean class="foo.bar.performer.impl.Player">
+                                <constructor-arg name="instrument">
+                                    <bean class="foo.bar.instrument.impl.Bass"/>
+                                </constructor-arg>
+                            </bean>
+                            <bean class="foo.bar.performer.impl.Player">
+                                <property name="instrument">
+                                    <bean class="foo.bar.instrument.impl.Guitar"/>
+                                </property>
+                            </bean>
+                            <bean class="foo.bar.performer.impl.Player">
+                                <property name="instrument">
+                                    <bean class="foo.bar.instrument.impl.Drums"/>
+                                </property>
+                            </bean>
+                            <bean id="vocalist1" class="foo.bar.performer.impl.Vocalist">
+                                <constructor-arg name="song" ref="song1"/>
+                            </bean>
+                            <bean class="foo.bar.performer.impl.PlayerVocalist">
+                                <property name="instrument">
+                                    <bean class="foo.bar.instrument.impl.Guitar"/>
+                                </property>
+                                <property name="song" value="#{song1}"/>
+                            </bean>
+                        </list>
+                    </property>
+                </bean>
+
+
+                <bean id="band_2" class="foo.bar.member.impl.MemberImpl">
+                    <property name="bandName" value="Stigmata"/>
+                    <property name="songs">
+                        <list>
+                            <ref bean="song3"/>
+                            <ref bean="song4"/>
+                        </list>
+                    </property>
+                    <property name="performers">
+                        <list>
+                            <bean class="foo.bar.performer.impl.Player">
+                                <constructor-arg name="instrument">
+                                    <bean class="foo.bar.instrument.impl.Bass"/>
+                                </constructor-arg>
+                            </bean>
+                            <bean class="foo.bar.performer.impl.Player">
+                                <property name="instrument">
+                                    <bean class="foo.bar.instrument.impl.Guitar"/>
+                                </property>
+                            </bean>
+                            <bean class="foo.bar.performer.impl.Player">
+                                <property name="instrument">
+                                    <bean class="foo.bar.instrument.impl.Drums"/>
+                                </property>
+                            </bean>
+                            <ref bean="vocalist1"/>
+                            <bean class="foo.bar.performer.impl.PlayerVocalist">
+                                <property name="instrument">
+                                    <bean class="foo.bar.instrument.impl.Guitar"/>
+                                </property>
+                                <property name="song" value="#{vocalist1.getSong()}"/>
+                            </bean>
+                        </list>
+                    </property>
+                </bean>
+            </list>
+        </constructor-arg>
+    </bean>
+
+</beans>
