@@ -8,15 +8,15 @@
     <context:component-scan base-package="foo.bar"/>
 
     <bean class="foo.bar.performer.impl.PlayerVocalist">
-        <constructor-arg name="instrument">
+        <property name="instrument">
             <bean class="foo.bar.instrument.impl.Guitar"/>
-        </constructor-arg>
-        <constructor-arg name="song">
+        </property>
+        <property name="song">
             <bean class="foo.bar.song.Song">
-                <constructor-arg name="name" value="Название песни"/>
-                <constructor-arg name="text" value="Текст песни"/>
+                <property name="name" value="Название песни"/>
+                <property name="text" value="Текст песни"/>
             </bean>
-        </constructor-arg>
+        </property>
     </bean>
 
 </beans>

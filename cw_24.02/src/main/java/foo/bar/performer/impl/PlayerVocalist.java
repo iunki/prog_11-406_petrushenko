@@ -12,9 +12,9 @@ public class PlayerVocalist implements Performer {
     private Song song;
     private Instrument instrument;
 
-    PlayerVocalist(){}
+    public PlayerVocalist(){}
 
-    PlayerVocalist(Song song, Instrument instrument){
+    public PlayerVocalist(Song song, Instrument instrument){
         this.song = song;
         this.instrument = instrument;
     }
