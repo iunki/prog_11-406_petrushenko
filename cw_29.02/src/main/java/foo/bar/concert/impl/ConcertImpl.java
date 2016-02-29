@@ -7,7 +7,7 @@ import java.util.List;
 
 public class ConcertImpl implements Concert {
 
-    private List<Member> members;
+    List<Member> members;
 
     public ConcertImpl(){}
 

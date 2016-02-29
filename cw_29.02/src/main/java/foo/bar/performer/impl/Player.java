@@ -6,7 +6,7 @@ import foo.bar.song.Song;
 
 public class Player implements Performer {
 
-    Instrument instrument;
+    private Instrument instrument;
 
     public Player(){}
 
